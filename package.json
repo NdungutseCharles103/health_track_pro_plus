@@ -1,0 +1,23 @@
+{
+  "name": "health_track_pro_plus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install": "yarn run install:server && yarn run install:client",
+    "install:server": "cd server && yarn install",
+    "install:client": "cd client && yarn install",
+    "start": "yarn run start:server && yarn run start:client",
+    "start:server": "cd server && yarn start",
+    "start:client": "cd client && yarn start",
+    "build": "yarn run build:server && yarn run build:client",
+    "build:server": "cd server && yarn run build",
+    "build:client": "cd client && yarn run build",
+    "test": "yarn run test:server && yarn run test:client",
+    "test:server": "cd server && yarn test",
+    "test:client": "cd client && yarn test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
