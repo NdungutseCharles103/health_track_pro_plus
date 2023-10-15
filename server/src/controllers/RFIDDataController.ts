@@ -69,5 +69,3 @@ export const deleteAllRFIDData = async (req: Request, res: Response) => {
     res.status(500).json(new ApiResponse(false, null, 'Failed to retrieve RFIDData', error));
   }
 };
-
-
