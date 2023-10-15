@@ -2,14 +2,18 @@ import express from 'express';
 import sequelize from './config/db';
 import router from './routes';
 import cors from 'cors'
+import bodyParser from 'body-parser';
 
 export const app = express();
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(cors({
+  origin: '*',
+  methods: '*',
+}))
 
 app.use('/api', router);
-app.use(cors({
-  origin: '*'
-}))
+
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
