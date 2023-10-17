@@ -1,4 +1,5 @@
-import { Column, Model, Table, DataType } from 'sequelize-typescript';
+import { Column, Model, Table, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Disease } from './Disease';
 
 @Table
 export class Patient extends Model {
@@ -8,6 +9,10 @@ export class Patient extends Model {
    @Column(DataType.STRING)
    patientNationalID!: string;
 
-   @Column(DataType.STRING)
-   frequentSickness!: string;
+   @ForeignKey(() => Disease)
+   @Column(DataType.INTEGER)
+   diseaseId!: number;
+
+   @BelongsTo(() => Disease)
+   frequentSickness!: Disease;
 }

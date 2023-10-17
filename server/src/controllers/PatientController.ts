@@ -1,21 +1,29 @@
 import { Request, Response } from 'express';
 import { Patient } from '../models/Patient';
 import { ApiResponse } from '../utils/ApiResponse';
+import patientSchema from '../models/patient.schema';
 
 export const getPatient = async (req: Request, res: Response) => {
    try {
       const patient = await Patient.findAll();
       res.json(new ApiResponse(true, patient, 'Successfully retrieved Patient'));
    } catch (error) {
+      console.log(error);
       res.status(500).json(new ApiResponse(false, null, 'Failed to retrieve Patient', error));
    }
 };
 
 export const createPatient = async (req: Request, res: Response) => {
    try {
-      const patient = await Patient.create(req.body);
-      res.status(201).json(new ApiResponse(true, patient, 'Successfully created Patient'));
+      const { error, value } = patientSchema.validate(req.body);
+      if (error) {
+         res.status(400).json(new ApiResponse(false, null, 'Failed to create Patient', error));
+      } else {
+         const patient = await Patient.create(value);
+         res.status(201).json(new ApiResponse(true, patient, 'Successfully created Patient'));
+      }
    } catch (error) {
+      console.log(error);
       res.status(500).json(new ApiResponse(false, null, 'Failed to retrieve Patient', error));
    }
 };

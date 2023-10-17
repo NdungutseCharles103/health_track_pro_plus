@@ -16,6 +16,14 @@ import {
    getRFIDChartDataYear,
    getRFIDChartDataMonth,
 } from '../controllers/charts/PatientChartContoller';
+import {
+   getDisease,
+   getDiseaseById,
+   deleteAllDisease,
+   deleteDisease,
+   updateDisease,
+   createDisease,
+} from '../controllers/DiseaseContoller';
 
 const router = express.Router();
 
@@ -40,5 +48,13 @@ router.get('/patient/chart/month', getRFIDChartDataYearInByMonths);
 router.get('/patient/chart/days-month', getRFIDChartDataMonth);
 router.get('/patient/chart/year', getRFIDChartDataYear);
 router.get('/patient/chart/range', getRFIDChartDataRange);
+
+// disease routes
+router.get('/disease', getDisease);
+router.post('/disease', createDisease);
+router.get('/disease/:id', getDiseaseById);
+router.put('/disease/:id', updateDisease);
+router.delete('/disease/:id', deleteDisease);
+router.delete('/disease', deleteAllDisease);
 
 export default router;

@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import request from 'supertest';
-import { app } from '../';
+import { app } from '..';
 
-describe('RFID Data API', () => {
-   it('should get a list of RFID data', (done) => {
+describe('patient Data API', () => {
+   it('should get a list of patient data', (done) => {
       request(app)
          .get('/api/patient')
          .expect(200)
@@ -14,11 +14,12 @@ describe('RFID Data API', () => {
          });
    });
 
-   it('should create a new RFID data entry', (done) => {
+   it('should create a new patient data entry', (done) => {
       const newData = {
          patientName: 'John Doe',
-         patientNationalID: '123456789',
+         patientNationalID: '1234567890123456',
          frequentSickness: 'Cold',
+         disease: 1,
       };
 
       request(app)
