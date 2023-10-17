@@ -8,7 +8,10 @@ export interface ApiResponse<T = any> {
 }
 
 // type keyType = 'day' | 'month' | 'year' | 'week' | 'range' | 'days-month';
-// export interface ChartData {
-//    [key in keyType]: string;
-//    data: any[];
-// }
+export interface ChartDataModel<T = any> {
+   data: T[];
+}
+
+export interface ChartDataByMonth<T = any> extends ChartDataModel<T> {
+   month: string;
+}

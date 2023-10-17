@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import { SensorData } from '../types/sensor.type';
 import { api } from '../utils/fetch';
-import { ApiResponse } from '../types';
+import { ApiResponse, ChartDataByMonth } from '../types';
 import MainLayout from '@/layouts/MainLayout';
 import { Card, Title, Text } from '@tremor/react';
-import { Patient } from '@/types/rfid.type';
+import { Patient } from '@/types/patient.type';
+import Chart from '@/components/dashboard/Chart';
 
 function IndexPage() {
    const [sensorData, setSensorData] = useState<SensorData[]>([]);
-   const [patient, setRfidData] = useState<Patient[]>([]);
+   const [patientData, setPatientData] = useState<ChartDataByMonth<Patient>[]>([]);
 
    const getSensorData = async () => {
       try {
@@ -22,9 +23,9 @@ function IndexPage() {
 
    const getPatient = async () => {
       try {
-         const res = await api.get<ApiResponse<SensorData[]>>('/sensor-data');
+         const res = await api.get<ApiResponse<ChartDataByMonth<Patient>[]>>('/patient/chart/month');
          const data = res.data.data;
-         setSensorData(data);
+         setPatientData(data);
       } catch (error) {
          console.log(error);
       }
@@ -37,23 +38,12 @@ function IndexPage() {
 
    return (
       <MainLayout>
-         {/* {sensorData.map((sensor) => {
-        return (
-          <div key={sensor.id}>
-            <div>{sensor.id}</div>
-            <div>{sensor.heartRate}</div>
-            <div>{sensor.createdAt}</div>
-          </div>
-        );
-      })} */}
          <main className="p-3">
             <Title>Your dashboard</Title>
             <Text>Measure your health, manage your account, and more. This is your dashboard, where you can</Text>
             <div className="mt-6">
                <div className="mt-6 w-full flex flex-col gap-y-2">
-                  <Card>
-                     <div className="h-80" />
-                  </Card>
+                  <Chart data={patientData} title="Patients registered over months" />
                </div>
             </div>
          </main>
