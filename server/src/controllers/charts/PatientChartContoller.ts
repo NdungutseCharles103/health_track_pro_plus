@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { Op } from 'sequelize';
-import { RFIDData } from '../../models/RFIDData';
+import { Patient } from '../../models/Patient';
 import { ApiResponse } from '../../utils/ApiResponse';
 import { Request, Response } from 'express';
 import localeData from 'dayjs/plugin/localeData';
@@ -12,14 +12,14 @@ dayjs().localeData();
 // get rfid chart data for last 24 hours (1 day) with hour intervals
 export const getRFIDChartData = async (req: Request, res: Response) => {
    try {
-      const rfidData = await RFIDData.findAll({
+      const patient = await Patient.findAll({
          where: {
             createdAt: {
                [Op.gte]: dayjs().subtract(1, 'day').toDate(),
             },
          },
       });
-      const chartData = rfidData.map(({ dataValues }) => {
+      const chartData = patient.map(({ dataValues }) => {
          return {
             hour: dayjs(dataValues.createdAt).format('HH'),
             data: dataValues,
@@ -45,14 +45,14 @@ export const getRFIDChartData = async (req: Request, res: Response) => {
 // get rfid chart data for last 7 days with day intervals
 export const getRFIDChartDataWeek = async (req: Request, res: Response) => {
    try {
-      const rfidData = await RFIDData.findAll({
+      const patient = await Patient.findAll({
          where: {
             createdAt: {
                [Op.gte]: dayjs().subtract(7, 'day').toDate(),
             },
          },
       });
-      const chartData = rfidData.map(({ dataValues }) => {
+      const chartData = patient.map(({ dataValues }) => {
          return {
             day: dayjs(dataValues.createdAt).format('DD'),
             data: dataValues,
@@ -80,14 +80,14 @@ export const getRFIDChartDataWeek = async (req: Request, res: Response) => {
 // get rfid chart data for last 30 days with day intervals
 export const getRFIDChartDataMonth = async (req: Request, res: Response) => {
    try {
-      const rfidData = await RFIDData.findAll({
+      const patient = await Patient.findAll({
          where: {
             createdAt: {
                [Op.gte]: dayjs().subtract(30, 'day').toDate(),
             },
          },
       });
-      const chartData = rfidData.map(({ dataValues }) => {
+      const chartData = patient.map(({ dataValues }) => {
          return {
             day: dayjs(dataValues.createdAt).format('DD'),
             data: dataValues,
@@ -114,14 +114,14 @@ export const getRFIDChartDataMonth = async (req: Request, res: Response) => {
 // get rfid chart data for last 365 days with month intervals
 export const getRFIDChartDataYear = async (req: Request, res: Response) => {
    try {
-      const rfidData = await RFIDData.findAll({
+      const patient = await Patient.findAll({
          where: {
             createdAt: {
                [Op.gte]: dayjs().subtract(365, 'day').toDate(),
             },
          },
       });
-      const chartData = rfidData.map(({ dataValues }) => {
+      const chartData = patient.map(({ dataValues }) => {
          return {
             day: dayjs(dataValues.createdAt).format('DD'),
             data: dataValues,
@@ -148,7 +148,7 @@ export const getRFIDChartDataYear = async (req: Request, res: Response) => {
 export const getRFIDChartDataRange = async (req: Request, res: Response) => {
    try {
       const { startDate, endDate } = req.body;
-      const rfidData = await RFIDData.findAll({
+      const patient = await Patient.findAll({
          where: {
             createdAt: {
                [Op.gte]: startDate,
@@ -156,7 +156,7 @@ export const getRFIDChartDataRange = async (req: Request, res: Response) => {
             },
          },
       });
-      const chartData = rfidData.map(({ dataValues }) => {
+      const chartData = patient.map(({ dataValues }) => {
          return {
             day: dayjs(dataValues.createdAt).format('DD'),
             data: dataValues,
@@ -182,14 +182,14 @@ export const getRFIDChartDataRange = async (req: Request, res: Response) => {
 // get rfid chart data for last 12 months with month intervals
 export const getRFIDChartDataYearInByMonths = async (req: Request, res: Response) => {
    try {
-      const rfidData = await RFIDData.findAll({
+      const patient = await Patient.findAll({
          where: {
             createdAt: {
                [Op.gte]: dayjs().subtract(12, 'months').toDate(),
             },
          },
       });
-      const chartData = rfidData.map(({ dataValues }) => {
+      const chartData = patient.map(({ dataValues }) => {
          return {
             month: dayjs(dataValues.createdAt).format('MMM'),
             data: dataValues,

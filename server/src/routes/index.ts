@@ -7,13 +7,7 @@ import {
    deleteSensorData,
    updateSensorData,
 } from '../controllers/SensorDataController';
-import {
-   createRFIDData,
-   getRFIDData,
-   updateRFIDData,
-   deleteAllRFIDData,
-   deleteRFIDData,
-} from '../controllers/RFIDDataController';
+import { createPatient, getPatient, updatePatient, deleteAllPatient, deletePatient } from '../controllers/PatientController';
 import {
    getRFIDChartData,
    getRFIDChartDataWeek,
@@ -21,7 +15,7 @@ import {
    getRFIDChartDataRange,
    getRFIDChartDataYear,
    getRFIDChartDataMonth,
-} from '../controllers/charts/RFIDChartContoller';
+} from '../controllers/charts/PatientChartContoller';
 
 const router = express.Router();
 
@@ -33,18 +27,18 @@ router.put('/sensor-data/:id', updateSensorData);
 router.delete('/sensor-data/:id', deleteSensorData);
 router.delete('/sensor-data', deleteAllSensorData);
 
-// RFIDData routes
-router.get('/rfid-data', getRFIDData);
-router.post('/rfid-data', createRFIDData);
-router.put('/rfid-data/:id', updateRFIDData);
-router.delete('/rfid-data/:id', deleteRFIDData);
-router.delete('/rfid-data', deleteAllRFIDData);
+// Patient routes
+router.get('/patient', getPatient);
+router.post('/patient', createPatient);
+router.put('/patient/:id', updatePatient);
+router.delete('/patient/:id', deletePatient);
+router.delete('/patient', deleteAllPatient);
 //rfid chart data routes
-router.get('/rfid-data/chart', getRFIDChartData);
-router.get('/rfid-data/chart/week', getRFIDChartDataWeek);
-router.get('/rfid-data/chart/month', getRFIDChartDataYearInByMonths);
-router.get('/rfid-data/chart/days-month', getRFIDChartDataMonth);
-router.get('/rfid-data/chart/year', getRFIDChartDataYear);
-router.get('/rfid-data/chart/range', getRFIDChartDataRange);
+router.get('/patient/chart', getRFIDChartData);
+router.get('/patient/chart/week', getRFIDChartDataWeek);
+router.get('/patient/chart/month', getRFIDChartDataYearInByMonths);
+router.get('/patient/chart/days-month', getRFIDChartDataMonth);
+router.get('/patient/chart/year', getRFIDChartDataYear);
+router.get('/patient/chart/range', getRFIDChartDataRange);
 
 export default router;
