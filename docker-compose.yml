@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  healttrackproplus_client:
+    image: healttrackproplus_client
+    build:
+      context: client
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+    depends_on:
+      - healttrackproplus_server
+  healttrackproplus_server:
+    image: healttrackproplus_server
+    build:
+      context: server
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 5000:5000
