@@ -1,10 +1,10 @@
+import MainLayout from '@/layouts/MainLayout';
+import { Patient } from '@/types/patient.type';
+import { Text, Title } from '@tremor/react';
 import { useEffect, useState } from 'react';
+import { ApiResponse, ChartDataByMonth } from '../types';
 import { SensorData } from '../types/sensor.type';
 import { api } from '../utils/fetch';
-import { ApiResponse, ChartDataByMonth } from '../types';
-import MainLayout from '@/layouts/MainLayout';
-import { Card, Title, Text } from '@tremor/react';
-import { Patient } from '@/types/patient.type';
 import Chart from '@/components/dashboard/Chart';
 
 function IndexPage() {
@@ -35,6 +35,7 @@ function IndexPage() {
       getSensorData();
       getPatient();
    }, []);
+   console.log('sensorData', sensorData);
 
    return (
       <MainLayout>

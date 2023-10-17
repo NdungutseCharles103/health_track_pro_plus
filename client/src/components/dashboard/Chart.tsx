@@ -1,22 +1,14 @@
 import { ChartDataByMonth } from '@/types';
 import { Patient } from '@/types/patient.type';
-import { Card, Title, AreaChart } from '@tremor/react';
+import { AreaChart, Card, Title } from '@tremor/react';
 import { FC } from 'react';
-
-const chartdata = [
-   {
-      date: 'Jan 22',
-      SemiAnalysis: 2890,
-      'The Pragmatic Engineer': 2338,
-   },
-];
 
 interface ChartProps {
    data: ChartDataByMonth<Patient>[];
    title: string;
 }
 
-const valueFormatter = (number: number) => `$ ${new Intl.NumberFormat('us').format(number).toString()}`;
+// const valueFormatter = (number: number) => `$ ${new Intl.NumberFormat('us').format(number).toString()}`;
 
 const Chart: FC<ChartProps> = ({ data, title }) => {
    const chartData = data.map((item) => ({

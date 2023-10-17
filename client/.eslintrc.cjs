@@ -24,5 +24,6 @@ module.exports = {
             bracketSpacing: true,
          },
       ],
+      'no-unused-vars': 'warn',
    },
 };

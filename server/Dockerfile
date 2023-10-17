@@ -9,4 +9,4 @@ RUN chown -R node /usr/src/app
 USER node
 # build
 RUN npm run build
-CMD ["npm", "serve"]
+CMD ["npm", "server"]
